@@ -27,9 +27,10 @@ Navigate back to the root directory of this repository. First, start the backend
 uvicorn app.main:app --reload
 ```
 
-then navigate to the frontend folder and start it with:
+then navigate into the frontend folder and start it with:
 
 ```
+cd frontend
 npm start
 ```
 
