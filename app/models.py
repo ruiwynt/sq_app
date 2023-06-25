@@ -6,34 +6,34 @@ from .database import Base
 
 
 class TaskStatus(enum.Enum):
-    not_started = 1
-    started = 2
-    completed = 3
-    cancelled = 4
+    not_started = "not_started"
+    started = "started"
+    completed = "completed"
+    cancelled = "cancelled"
 
 
 class CabinType(enum.Enum):
-    first = 1
-    business = 2
-    economy = 3
-    crew = 4
+    first = "first"
+    business = "business"
+    economy = "economy"
+    crew = "crew"
 
 
 class SeatType(enum.Enum):
-    middle = 1
-    window = 2
-    aisle = 3
+    middle = "middle"
+    window = "window"
+    aisle = "aisle"
 
 
 class TaskPriority(enum.Enum):
-    low = 1
-    medium = 2
-    high = 3
+    low = "low"
+    medium = "medium"
+    high = "high"
 
 
 class ItemCategory(enum.Enum):
-    food = 1
-    duty_free = 2
+    food = "food"
+    misc = "misc"
 
 
 class Item(Base):
@@ -67,6 +67,7 @@ class ItemType(Base):
     __tablename__ = "item_types"
 
     id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
     category = Column(Enum(ItemCategory), index=True)
     description = Column(String)
     image = Column(LargeBinary)

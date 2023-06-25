@@ -1,4 +1,4 @@
-from datetime import now
+from datetime import datetime
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -21,7 +21,7 @@ def get_item(db: Session, item_id: int):
     return db.get(models.Item, item_id)
 
 def get_items(db: Session):
-    return db.query(models.Item).order_by(models.Item.item_type.name).all()
+    return db.query(models.Item).order_by(models.Item.item_type).all()
 
 def create_item(db: Session, item: schemas.ItemBase):
     item_type = db.query(models.ItemType).filter(models.ItemType.id == item.item_type_id)
@@ -45,11 +45,14 @@ def create_item(db: Session, item: schemas.ItemBase):
 def apply_discount(db: Session, item: schemas.Item, discount_percent: float):
     item.discount_percent = discount_percent 
 
+def get_item_types(db: Session):
+    return db.query(models.ItemType).order_by(models.ItemType.name).all()
+
 def get_item_type(db: Session, item_type_id: int):
     return db.get(models.ItemType, item_type_id)
 
 def get_item_type_by_name(db: Session, item_type_name: str):
-    return db.query(models.ItemType).filter(models.ItemType.name == item_type_name)
+    return db.query(models.ItemType).filter(models.ItemType.name == item_type_name).first()
 
 def create_item_type(db: Session, item_type: schemas.ItemTypeBase):
     new_item_type = models.ItemType(
